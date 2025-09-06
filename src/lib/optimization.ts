@@ -102,9 +102,6 @@ function generateRecencyWeights(n: number, recencyFactor: number): number[] {
 
 // Fit Hill model using optimized grid search
 function fitHillModel(spend: number[], revenue: number[], weights?: number[]): HillParams {
-  console.log(`Fitting Hill model for ${spend.length} data points...`);
-  const startTime = performance.now();
-  
   const maxRevenue = Math.max(...revenue);
   const maxSpend = Math.max(...spend, 1);
 
@@ -115,16 +112,13 @@ function fitHillModel(spend: number[], revenue: number[], weights?: number[]): H
 
   let bestParams = { alpha: alphas[0], gamma: 1.6, K: Ks[1] };
   let bestSSE = Infinity;
-  let evaluations = 0;
+  const startTime = performance.now();
 
   for (const alpha of alphas) {
     for (const gamma of gammas) {
       for (const K of Ks) {
-        evaluations++;
-        
         // Timeout protection - abort if taking too long
         if (performance.now() - startTime > 5000) {
-          console.warn(`Hill model fitting timed out after ${evaluations} evaluations`);
           break;
         }
         
@@ -148,8 +142,6 @@ function fitHillModel(spend: number[], revenue: number[], weights?: number[]): H
     if (performance.now() - startTime > 5000) break;
   }
 
-  const elapsed = performance.now() - startTime;
-  console.log(`Hill model fitted in ${elapsed.toFixed(1)}ms with ${evaluations} evaluations`);
   return bestParams;
 }
 
@@ -237,9 +229,6 @@ export async function optimizeSingleASIN(
   marginSettings: MarginSettings, 
   settings: OptimizationSettings
 ): Promise<OptimizationResults> {
-  console.log('Starting single ASIN optimization...');
-  const startTime = performance.now();
-  
   if (data.length < 3) {
     throw new Error('At least 3 data points required');
   }
@@ -262,12 +251,8 @@ export async function optimizeSingleASIN(
   const params = fitHillModel(spendArray, revenueArray, weights);
 
   // Find optimal spend
-  console.log('Finding optimal spend...');
   const maxSearchSpend = autoBound(spendArray, params, targetMROAS, currentFactor);
   const results = findOptimalSpend(targetMROAS, params, maxSearchSpend, currentFactor);
-
-  const elapsed = performance.now() - startTime;
-  console.log(`Single ASIN optimization completed in ${elapsed.toFixed(1)}ms`);
 
   // Calculate current performance if current spend is provided
   if (settings.currentSpend > 0) {
@@ -303,13 +288,11 @@ export async function optimizePortfolio(
   }
 
   const results = [];
-  console.log(`Starting portfolio optimization for ${Object.keys(asinGroups).length} ASINs...`);
 
   let processedCount = 0;
   for (const [asin, asinData] of Object.entries(asinGroups)) {
     try {
       processedCount++;
-      console.log(`Processing ASIN ${processedCount}/${Object.keys(asinGroups).length}: ${asin}`);
       
       if (asinData.length < 3) {
         results.push({
