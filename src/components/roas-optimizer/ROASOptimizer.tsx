@@ -48,8 +48,6 @@ export interface OptimizationResults {
 }
 
 export const ROASOptimizer = () => {
-  console.log("ROASOptimizer component rendering...");
-  
   const [mode, setMode] = useState<'single' | 'portfolio'>('single');
   const [data, setData] = useState<ROASData[]>([]);
   const [marginSettings, setMarginSettings] = useState<MarginSettings>({
@@ -98,7 +96,6 @@ export const ROASOptimizer = () => {
 
   return (
     <div className="container max-w-7xl mx-auto py-8 px-4 space-y-6">
-      <p className="text-sm text-success">ROASOptimizer component loaded successfully!</p>
       <Header />
       
       {/* Input Section - All on same level */}
