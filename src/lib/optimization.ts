@@ -100,17 +100,17 @@ function generateRecencyWeights(n: number, recencyFactor: number): number[] {
   return weights.map(w => w * n / sum);
 }
 
-// Fit Hill model using optimized grid search
+// Fit Hill model using grid search (75 combinations)
 function fitHillModel(spend: number[], revenue: number[], weights?: number[]): HillParams {
   const maxRevenue = Math.max(...revenue);
   const maxSpend = Math.max(...spend, 1);
 
-  // Optimized grid search parameters (reduced for better performance)
-  const alphas = [1.05, 1.15].map(m => m * maxRevenue);
-  const gammas = [1.2, 1.6, 2.0];
-  const Ks = [0.5, 0.75, 1.0].map(m => m * maxSpend);
+  // Original grid search parameters (75 combinations: 3×5×5)
+  const alphas = [1.05, 1.1, 1.2].map(m => m * maxRevenue);
+  const gammas = [1.1, 1.3, 1.6, 2.0, 2.5];
+  const Ks = [0.25, 0.5, 0.75, 1.0, 1.5].map(m => m * maxSpend);
 
-  let bestParams = { alpha: alphas[0], gamma: 1.6, K: Ks[1] };
+  let bestParams = { alpha: alphas[0], gamma: 1.6, K: Ks[2] };
   let bestSSE = Infinity;
   const startTime = performance.now();
 
@@ -118,7 +118,7 @@ function fitHillModel(spend: number[], revenue: number[], weights?: number[]): H
     for (const gamma of gammas) {
       for (const K of Ks) {
         // Timeout protection - abort if taking too long
-        if (performance.now() - startTime > 5000) {
+        if (performance.now() - startTime > 8000) {
           break;
         }
         
@@ -137,9 +137,9 @@ function fitHillModel(spend: number[], revenue: number[], weights?: number[]): H
           bestParams = params;
         }
       }
-      if (performance.now() - startTime > 5000) break;
+      if (performance.now() - startTime > 8000) break;
     }
-    if (performance.now() - startTime > 5000) break;
+    if (performance.now() - startTime > 8000) break;
   }
 
   return bestParams;
