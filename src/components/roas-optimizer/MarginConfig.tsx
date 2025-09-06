@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { HelpCircle } from 'lucide-react';
 import { MarginSettings } from './ROASOptimizer';
 
 interface MarginConfigProps {
@@ -27,9 +29,19 @@ export const MarginConfig = ({ settings, onSettingsChange }: MarginConfigProps) 
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-2">
-            <Label htmlFor="grossMargin" className="text-sm font-medium">
-              Gross Margin %
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="grossMargin" className="text-sm font-medium">
+                Gross Margin %
+              </Label>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <HelpCircle className="h-3 w-3 text-muted-foreground cursor-help" />
+                </TooltipTrigger>
+                <TooltipContent side="top" className="max-w-xs">
+                  <p>The percentage of revenue remaining after cost of goods sold (COGS). This represents your profit margin before advertising and other expenses.</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <Input
               id="grossMargin"
               type="number"
@@ -41,9 +53,19 @@ export const MarginConfig = ({ settings, onSettingsChange }: MarginConfigProps) 
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="requiredNet" className="text-sm font-medium">
-              Required Net Margin %
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="requiredNet" className="text-sm font-medium">
+                Required Net Margin %
+              </Label>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <HelpCircle className="h-3 w-3 text-muted-foreground cursor-help" />
+                </TooltipTrigger>
+                <TooltipContent side="top" className="max-w-xs">
+                  <p>The minimum net profit margin you need after all expenses. This is your target bottom-line profitability that must be preserved.</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <Input
               id="requiredNet"
               type="number"

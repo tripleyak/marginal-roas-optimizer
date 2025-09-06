@@ -5,7 +5,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Upload, Download, Zap } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Upload, Download, Zap, HelpCircle } from 'lucide-react';
 import { ROASData } from './ROASOptimizer';
 import * as Papa from 'papaparse';
 import * as XLSX from 'xlsx';
@@ -282,7 +283,21 @@ A2,2025-08-03,320,2000,3100,30,14`
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div className="space-y-2">
-            <CardTitle className="text-lg">Mode & Data Upload</CardTitle>
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-lg">Mode & Data Upload</CardTitle>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                </TooltipTrigger>
+                <TooltipContent side="top" className="max-w-xs">
+                  <p>Choose your optimization mode:</p>
+                  <br />
+                  <p><strong>Single ASIN:</strong> Optimize spend for one product using time series data</p>
+                  <br />
+                  <p><strong>Portfolio:</strong> Optimize spend allocation across multiple ASINs</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <Select value={mode} onValueChange={onModeChange}>
               <SelectTrigger className="w-48">
                 <SelectValue />

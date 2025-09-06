@@ -5,7 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { Rocket, Package, Trash2 } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Rocket, Package, Trash2, HelpCircle } from 'lucide-react';
 import { ROASData, MarginSettings, OptimizationSettings, OptimizationResults } from './ROASOptimizer';
 import { optimizeSingleASIN, optimizePortfolio } from '@/lib/optimization';
 
@@ -92,7 +93,17 @@ export const SettingsPanel = ({
 
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="currentSpend">Current Daily Spend ($)</Label>
+          <div className="flex items-center gap-2">
+            <Label htmlFor="currentSpend">Current Daily Spend ($)</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="h-3 w-3 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-xs">
+                <p>Your current average daily advertising spend. This helps the optimizer understand your existing scale and calculate performance metrics.</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <Input
             id="currentSpend"
             type="number"
@@ -105,7 +116,21 @@ export const SettingsPanel = ({
 
 
         <div className="space-y-2">
-          <Label>Seasonality</Label>
+          <div className="flex items-center gap-2">
+            <Label>Seasonality</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="h-3 w-3 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-xs">
+                <p>Applies seasonal adjustments to the data:</p>
+                <br />
+                <p><strong>None:</strong> No seasonal patterns</p>
+                <p><strong>Weekly:</strong> Adjusts for day-of-week effects</p>
+                <p><strong>Monthly:</strong> Adjusts for month-based seasonal trends</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <Select 
             value={settings.seasonality} 
             onValueChange={(value: 'none' | 'weekly' | 'monthly') => 
@@ -124,7 +149,22 @@ export const SettingsPanel = ({
         </div>
 
         <div className="space-y-3">
-          <Label>Recency Weight (0 = even, 1 = heavy recent)</Label>
+          <div className="flex items-center gap-2">
+            <Label>Recency Weight (0 = even, 1 = heavy recent)</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="h-3 w-3 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-xs">
+                <p>Controls how much to weight recent data vs historical data:</p>
+                <br />
+                <p><strong>0:</strong> All data points weighted equally</p>
+                <p><strong>1:</strong> Recent data heavily prioritized</p>
+                <br />
+                <p>Higher values make the model more responsive to recent trends.</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <Slider
             value={[settings.recency]}
             onValueChange={([value]) => handleSettingChange('recency', value)}
