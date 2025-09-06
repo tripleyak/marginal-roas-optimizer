@@ -2,95 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Professional ROAS Optimizer Design System - Financial Dashboard Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base theme - professional dark */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Cards & surfaces */
+    --card: 225 39% 9%;
+    --card-foreground: 210 40% 95%;
+    --card-hover: 225 39% 11%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Interactive elements */
+    --popover: 225 39% 9%;
+    --popover-foreground: 210 40% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Brand colors - sophisticated purple/blue */
+    --primary: 259 94% 51%;
     --primary-foreground: 210 40% 98%;
+    --primary-glow: 259 94% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
+    /* Secondary brand */
+    --secondary: 244 89% 62%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Muted & subtle */
+    --muted: 217 32% 16%;
+    --muted-foreground: 217 10% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent & highlights */
+    --accent: 217 32% 16%;
+    --accent-foreground: 210 40% 95%;
 
-    --destructive: 0 62.8% 30.6%;
+    /* Status colors */
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Borders & inputs */
+    --border: 217 32% 16%;
+    --input: 217 32% 14%;
+    --input-hover: 217 32% 18%;
+    --ring: 259 94% 51%;
+
+    /* Gradients - professional financial theme */
+    --gradient-primary: linear-gradient(135deg, hsl(259 94% 51%), hsl(244 89% 62%));
+    --gradient-background: linear-gradient(135deg, hsl(222 47% 7%), hsl(225 39% 9%));
+    --gradient-card: linear-gradient(180deg, hsl(225 39% 9%), hsl(225 39% 7%));
+    --gradient-subtle: linear-gradient(180deg, hsl(225 39% 11%), hsl(225 39% 9%));
+
+    /* Shadows & glows */
+    --shadow-elegant: 0 10px 30px -10px hsl(259 94% 51% / 0.2);
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --glow-primary: 0 0 40px hsl(259 94% 51% / 0.3);
+
+    /* Animation & transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
+
+    /* Chart colors - data visualization friendly */
+    --chart-1: 259 94% 51%;
+    --chart-2: 244 89% 62%;
+    --chart-3: 142 76% 36%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 0 84% 60%;
+    --chart-grid: 217 32% 20%;
+
+    --sidebar-background: 225 39% 9%;
+    --sidebar-foreground: 210 40% 95%;
+    --sidebar-primary: 259 94% 51%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217 32% 16%;
+    --sidebar-accent-foreground: 210 40% 95%;
+    --sidebar-border: 217 32% 16%;
+    --sidebar-ring: 259 94% 51%;
+  }
+
+  /* Force dark theme for professional financial interface */
+  .light {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 95%;
+    --card: 225 39% 9%;
+    --card-foreground: 210 40% 95%;
+    --popover: 225 39% 9%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 259 94% 51%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 32% 16%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 217 32% 16%;
+    --muted-foreground: 217 10% 65%;
+    --accent: 217 32% 16%;
+    --accent-foreground: 210 40% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 32% 16%;
+    --input: 217 32% 14%;
+    --ring: 259 94% 51%;
   }
 }
 
@@ -101,5 +116,94 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    min-height: 100vh;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Professional typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Enhanced form inputs */
+  input[type="number"],
+  input[type="text"],
+  input[type="file"],
+  textarea,
+  select {
+    @apply bg-input border-border text-foreground;
+    @apply transition-all duration-200 ease-in-out;
+    @apply focus:border-primary focus:ring-2 focus:ring-primary/20;
+    @apply hover:border-input-hover;
+  }
+
+  /* Professional cards */
+  .card-enhanced {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .card-enhanced:hover {
+    background: var(--gradient-subtle);
+    box-shadow: var(--shadow-elegant);
+  }
+
+  /* Chart containers */
+  .chart-container {
+    @apply bg-card/50 border border-border rounded-lg p-4;
+    backdrop-filter: blur(8px);
+  }
+
+  /* Data table styling */
+  .data-table {
+    @apply w-full border-collapse;
+  }
+
+  .data-table th,
+  .data-table td {
+    @apply px-4 py-3 border-b border-border text-sm;
+    @apply first:text-left text-right;
+  }
+
+  .data-table th {
+    @apply bg-muted/50 font-semibold text-muted-foreground;
+  }
+
+  /* Metric display */
+  .metric-card {
+    @apply p-4 rounded-lg border border-border;
+    background: var(--gradient-card);
+  }
+
+  .metric-value {
+    @apply text-2xl font-bold tracking-tight;
+  }
+
+  .metric-label {
+    @apply text-sm text-muted-foreground font-medium;
+  }
+
+  /* Status indicators */
+  .status-positive {
+    @apply text-success;
+  }
+
+  .status-negative {
+    @apply text-destructive;
+  }
+
+  .status-warning {
+    @apply text-warning;
+  }
+
+  /* Professional pills/badges */
+  .pill {
+    @apply px-3 py-1.5 rounded-full text-xs font-medium;
+    @apply bg-muted/50 text-muted-foreground border border-border;
   }
 }
