@@ -151,7 +151,7 @@ export const DataUpload = ({
       const existing = aggregatedMap.get(key)!;
       existing.spend += toNumber(row.spend);
       existing.ad_sales += toNumber(row.ad_sales);
-      if (row.total_sales) existing.total_sales = (existing.total_sales || 0) + toNumber(row.total_sales);
+      if (row.total_sales != null) existing.total_sales = (existing.total_sales || 0) + toNumber(row.total_sales);
     }
 
     const finalData = Array.from(aggregatedMap.values())

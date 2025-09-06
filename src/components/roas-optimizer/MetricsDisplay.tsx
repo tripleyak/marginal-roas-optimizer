@@ -45,10 +45,13 @@ export const MetricsDisplay = ({
   data 
 }: MetricsDisplayProps) => {
   // Calculate organic share if total_sales available
-  const totalSalesSum = data.filter(d => d.total_sales).reduce((sum, d) => sum + (d.total_sales || 0), 0);
+  const totalSalesSum = data
+    .filter(d => d.total_sales != null) // Only exclude null/undefined, include 0
+    .reduce((sum, d) => sum + (d.total_sales || 0), 0);
   const adSalesSum = data.reduce((sum, d) => sum + d.ad_sales, 0);
+  const organicSales = totalSalesSum - adSalesSum;
   const organicShare = totalSalesSum > 0 
-    ? `${(((totalSalesSum - adSalesSum) / totalSalesSum) * 100).toFixed(1)}%`
+    ? `${((organicSales / totalSalesSum) * 100).toFixed(1)}%`
     : '—';
 
   const deltaSpend = results.deltaSpend || 0;

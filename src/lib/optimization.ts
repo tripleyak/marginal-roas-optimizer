@@ -335,9 +335,12 @@ export async function optimizePortfolio(
       const currentRevenue = hillY(currentSpend, params);
 
       // Calculate organic share
-      const totalSalesSum = asinData.filter(d => d.total_sales).reduce((sum, d) => sum + (d.total_sales || 0), 0);
+      const totalSalesSum = asinData
+        .filter(d => d.total_sales != null) // Only exclude null/undefined, include 0
+        .reduce((sum, d) => sum + (d.total_sales || 0), 0);
       const adSalesSum = asinData.reduce((sum, d) => sum + d.ad_sales, 0);
-      const organicShare = totalSalesSum > 0 ? (1 - adSalesSum / totalSalesSum) * 100 : null;
+      const organicSales = totalSalesSum - adSalesSum;
+      const organicShare = totalSalesSum > 0 ? (organicSales / totalSalesSum) * 100 : null;
 
       const actionText = asinResults.feasible 
         ? (asinResults.optimalSpend > currentSpend ? 'Increase' : 'Decrease')
