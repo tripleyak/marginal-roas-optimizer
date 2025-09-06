@@ -67,13 +67,13 @@
 
     --radius: 0.75rem;
 
-    /* Chart colors - data visualization friendly */
-    --chart-1: 259 94% 51%;
-    --chart-2: 244 89% 62%;
-    --chart-3: 142 76% 36%;
-    --chart-4: 38 92% 50%;
-    --chart-5: 0 84% 60%;
-    --chart-grid: 217 32% 20%;
+    /* Chart colors - brighter for visibility on dark background */
+    --chart-1: 259 94% 65%;
+    --chart-2: 244 89% 70%;
+    --chart-3: 142 76% 50%;
+    --chart-4: 38 92% 65%;
+    --chart-5: 0 84% 70%;
+    --chart-grid: 217 32% 25%;
 
     --sidebar-background: 225 39% 9%;
     --sidebar-foreground: 210 40% 95%;
@@ -153,9 +153,10 @@
     box-shadow: var(--shadow-elegant);
   }
 
-  /* Chart containers */
+  /* Chart containers - enhanced visibility */
   .chart-container {
-    @apply bg-card/50 border border-border rounded-lg p-4;
+    @apply bg-card border border-border rounded-lg p-4;
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--card-hover)));
     backdrop-filter: blur(8px);
   }
 

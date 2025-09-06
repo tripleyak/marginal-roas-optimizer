@@ -98,9 +98,10 @@ export const ROASOptimizer = () => {
     <div className="container max-w-7xl mx-auto py-8 px-4 space-y-6">
       <Header />
       
+      {/* Input Section - All on same level */}
       <div className="grid grid-cols-12 gap-6">
         {/* Data Upload */}
-        <div className="col-span-8">
+        <div className="col-span-6">
           <DataUpload
             mode={mode}
             onModeChange={setMode}
@@ -113,7 +114,7 @@ export const ROASOptimizer = () => {
         </div>
 
         {/* Margin Configuration */}
-        <div className="col-span-4">
+        <div className="col-span-3">
           <MarginConfig
             settings={marginSettings}
             onSettingsChange={updateMarginSettings}
@@ -136,6 +137,10 @@ export const ROASOptimizer = () => {
             onClearAll={clearAll}
           />
         </div>
+      </div>
+
+      {/* Results Section */}
+      <div className="grid grid-cols-12 gap-6">
 
         {/* Results and Charts */}
         {mode === 'single' && results && (
