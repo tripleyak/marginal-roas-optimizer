@@ -103,16 +103,6 @@ export const SettingsPanel = ({
           />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="maxSpend">Search Upper Bound ($)</Label>
-          <Input
-            id="maxSpend"
-            type="number"
-            value={settings.maxSpend}
-            onChange={(e) => handleSettingChange('maxSpend', parseFloat(e.target.value) || 3000)}
-            min="100"
-          />
-        </div>
 
         <div className="space-y-2">
           <Label>Seasonality</Label>
