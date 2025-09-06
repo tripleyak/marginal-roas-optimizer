@@ -137,6 +137,20 @@ function fitHillModel(spend: number[], revenue: number[], weights?: number[]): H
   return bestParams;
 }
 
+// Automatic bound helper
+function autoBound(X: number[], params: HillParams, required: number, factorNow: number = 1): number {
+  const mAt = (s: number) => hillDY(s, params) * factorNow;
+  const maxHist = Math.max(...X, 1);
+  // Start with a sensible scale: multiples of observed data and the Hill scale K
+  let hi = Math.max(2 * maxHist, 4 * params.K, 1);
+  const hiMax = Math.max(50 * maxHist, 20 * params.K); // safety ceiling
+  // Expand until mROAS at 'hi' is below the threshold (or ceiling reached)
+  for (let i = 0; i < 32 && mAt(hi) > required && hi < hiMax; i++) {
+    hi *= 1.8;
+  }
+  return Math.min(hi, hiMax);
+}
+
 // Find optimal spend that achieves target mROAS
 function findOptimalSpend(
   targetMROAS: number, 
@@ -229,7 +243,7 @@ export async function optimizeSingleASIN(
   const params = fitHillModel(spendArray, revenueArray, weights);
 
   // Find optimal spend
-  const maxSearchSpend = Math.max(settings.maxSpend, Math.max(...spendArray) * 2, 1);
+  const maxSearchSpend = autoBound(spendArray, params, targetMROAS, currentFactor);
   const results = findOptimalSpend(targetMROAS, params, maxSearchSpend, currentFactor);
 
   // Calculate current performance if current spend is provided
@@ -301,11 +315,11 @@ export async function optimizePortfolio(
 
       const asinResults = await optimizeSingleASIN(asinData, asinMargins, settings);
       const currentSpend = asinData[asinData.length - 1].spend;
-      const currentRevenue = hillY(currentSpend, 
-        fitHillModel(
-          asinData.map(d => d.spend), 
-          asinData.map(d => d.ad_sales)
-        ));
+      const params = fitHillModel(
+        asinData.map(d => d.spend), 
+        asinData.map(d => d.ad_sales)
+      );
+      const currentRevenue = hillY(currentSpend, params);
 
       // Calculate organic share
       const totalSalesSum = asinData.filter(d => d.total_sales).reduce((sum, d) => sum + (d.total_sales || 0), 0);
