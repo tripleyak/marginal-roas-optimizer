@@ -2,64 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional ROAS Optimizer Design System - Financial Dashboard Theme */
+/* Modern Light ROAS Optimizer Design System - Clean AI Interface Theme */
 
 @layer base {
   :root {
-    /* Base theme - professional dark */
-    --background: 222 47% 7%;
-    --foreground: 210 40% 95%;
+    /* Base theme - clean light like ChatGPT/Claude */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 13%;
 
     /* Cards & surfaces */
-    --card: 225 39% 9%;
-    --card-foreground: 210 40% 95%;
-    --card-hover: 225 39% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 13%;
+    --card-hover: 210 40% 98%;
 
     /* Interactive elements */
-    --popover: 225 39% 9%;
-    --popover-foreground: 210 40% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 13%;
 
-    /* Brand colors - sophisticated purple/blue */
-    --primary: 259 94% 51%;
-    --primary-foreground: 210 40% 98%;
-    --primary-glow: 259 94% 65%;
+    /* Brand colors - modern blue/purple like AI interfaces */
+    --primary: 217 89% 61%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 89% 70%;
 
     /* Secondary brand */
-    --secondary: 244 89% 62%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 220 13% 13%;
 
     /* Muted & subtle */
-    --muted: 217 32% 16%;
-    --muted-foreground: 217 10% 65%;
+    --muted: 210 40% 95%;
+    --muted-foreground: 215 16% 47%;
 
     /* Accent & highlights */
-    --accent: 217 32% 16%;
-    --accent-foreground: 210 40% 95%;
+    --accent: 210 40% 95%;
+    --accent-foreground: 220 13% 13%;
 
     /* Status colors */
     --success: 142 76% 36%;
-    --success-foreground: 210 40% 98%;
+    --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 0%;
+    --warning-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     /* Borders & inputs */
-    --border: 217 32% 16%;
-    --input: 217 32% 14%;
-    --input-hover: 217 32% 18%;
-    --ring: 259 94% 51%;
+    --border: 214 32% 91%;
+    --input: 0 0% 100%;
+    --input-hover: 210 40% 95%;
+    --ring: 217 89% 61%;
 
-    /* Gradients - professional financial theme */
-    --gradient-primary: linear-gradient(135deg, hsl(259 94% 51%), hsl(244 89% 62%));
-    --gradient-background: linear-gradient(135deg, hsl(222 47% 7%), hsl(225 39% 9%));
-    --gradient-card: linear-gradient(180deg, hsl(225 39% 9%), hsl(225 39% 7%));
-    --gradient-subtle: linear-gradient(180deg, hsl(225 39% 11%), hsl(225 39% 9%));
+    /* Gradients - clean modern theme */
+    --gradient-primary: linear-gradient(135deg, hsl(217 89% 61%), hsl(217 89% 70%));
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 99%));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 40% 98%), hsl(0 0% 100%));
 
     /* Shadows & glows */
-    --shadow-elegant: 0 10px 30px -10px hsl(259 94% 51% / 0.2);
-    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
-    --glow-primary: 0 0 40px hsl(259 94% 51% / 0.3);
+    --shadow-elegant: 0 10px 30px -10px hsl(217 89% 61% / 0.1);
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --glow-primary: 0 0 20px hsl(217 89% 61% / 0.15);
 
     /* Animation & transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -67,45 +67,45 @@
 
     --radius: 0.75rem;
 
-    /* Chart colors - brighter for visibility on dark background */
-    --chart-1: 259 94% 65%;
-    --chart-2: 244 89% 70%;
-    --chart-3: 142 76% 50%;
-    --chart-4: 38 92% 65%;
-    --chart-5: 0 84% 70%;
-    --chart-grid: 217 32% 25%;
+    /* Chart colors - vibrant for light background */
+    --chart-1: 217 89% 61%;
+    --chart-2: 262 83% 58%;
+    --chart-3: 142 76% 36%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 0 84% 60%;
+    --chart-grid: 214 32% 91%;
 
-    --sidebar-background: 225 39% 9%;
-    --sidebar-foreground: 210 40% 95%;
-    --sidebar-primary: 259 94% 51%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217 32% 16%;
-    --sidebar-accent-foreground: 210 40% 95%;
-    --sidebar-border: 217 32% 16%;
-    --sidebar-ring: 259 94% 51%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 13% 13%;
+    --sidebar-primary: 217 89% 61%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 95%;
+    --sidebar-accent-foreground: 220 13% 13%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 217 89% 61%;
   }
 
-  /* Force dark theme for professional financial interface */
+  /* Light theme consistency */
   .light {
-    --background: 222 47% 7%;
-    --foreground: 210 40% 95%;
-    --card: 225 39% 9%;
-    --card-foreground: 210 40% 95%;
-    --popover: 225 39% 9%;
-    --popover-foreground: 210 40% 95%;
-    --primary: 259 94% 51%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217 32% 16%;
-    --secondary-foreground: 210 40% 95%;
-    --muted: 217 32% 16%;
-    --muted-foreground: 217 10% 65%;
-    --accent: 217 32% 16%;
-    --accent-foreground: 210 40% 95%;
+    --background: 0 0% 100%;
+    --foreground: 220 13% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 13%;
+    --primary: 217 89% 61%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 220 13% 13%;
+    --muted: 210 40% 95%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 95%;
+    --accent-foreground: 220 13% 13%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 32% 16%;
-    --input: 217 32% 14%;
-    --ring: 259 94% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 0 0% 100%;
+    --ring: 217 89% 61%;
   }
 }
 
@@ -153,11 +153,12 @@
     box-shadow: var(--shadow-elegant);
   }
 
-  /* Chart containers - enhanced visibility */
+  /* Chart containers - enhanced visibility for light theme */
   .chart-container {
     @apply bg-card border border-border rounded-lg p-4;
-    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--card-hover)));
-    backdrop-filter: blur(8px);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
   }
 
   /* Data table styling */
