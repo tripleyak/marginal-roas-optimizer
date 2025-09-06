@@ -303,8 +303,11 @@ export async function optimizePortfolio(
         continue;
       }
 
-      // Use ASIN-specific margins if available, otherwise global
-      const firstRow = asinData[0];
+      // Sort data by date first
+      const sortedAsinData = [...asinData].sort((a, b) => a.date.localeCompare(b.date));
+      
+      // Use ASIN-specific margins if available, otherwise global  
+      const firstRow = sortedAsinData[0];
       const cm = (firstRow.gross_margin && firstRow.required_net) 
         ? (firstRow.gross_margin - firstRow.required_net) / 100
         : marginSettings.contributionMargin / 100;
@@ -325,20 +328,23 @@ export async function optimizePortfolio(
       };
 
       // Optimize this ASIN (includes Hill model fitting)
-      const asinResults = await optimizeSingleASIN(asinData, asinMargins, settings);
-      const currentSpend = asinData[asinData.length - 1].spend;
+      const asinResults = await optimizeSingleASIN(sortedAsinData, asinMargins, settings);
+      const currentSpend = sortedAsinData[sortedAsinData.length - 1].spend;
       
-      // Re-fit Hill model for current revenue calculation (already optimized with timeout)
-      const spendArray = asinData.map(d => d.spend);
-      const revenueArray = asinData.map(d => d.ad_sales);
+      // Apply seasonal adjustment for consistent calculations
+      const { adjustedData: asinAdjustedData } = adjustForSeasonality(sortedAsinData, settings.seasonality);
+      
+      // Re-fit Hill model using same methodology as optimization
+      const spendArray = asinAdjustedData.map(d => d.spend);
+      const revenueArray = asinAdjustedData.map(d => d.ad_sales_adj || d.ad_sales);
       const params = fitHillModel(spendArray, revenueArray);
       const currentRevenue = hillY(currentSpend, params);
 
-      // Calculate organic share
-      const totalSalesSum = asinData
+      // Calculate organic share using sorted data
+      const totalSalesSum = sortedAsinData
         .filter(d => d.total_sales != null) // Only exclude null/undefined, include 0
         .reduce((sum, d) => sum + (d.total_sales || 0), 0);
-      const adSalesSum = asinData.reduce((sum, d) => sum + d.ad_sales, 0);
+      const adSalesSum = sortedAsinData.reduce((sum, d) => sum + d.ad_sales, 0);
       const organicSales = totalSalesSum - adSalesSum;
       const organicShare = totalSalesSum > 0 ? (organicSales / totalSalesSum) * 100 : null;
 
